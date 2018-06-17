@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.Callable;
 
@@ -58,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_ok)
     public void onTapBtnOk(View view) {
-        operationExecution();
+        if (etInput != null) {
+            operationExecution();
+        } else {
+            Toast.makeText(getApplicationContext(), "Inout number", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void operationExecution() {
@@ -81,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(@NonNull int[] integer) {
+                        count = Integer.parseInt(etInput.getText().toString());
                         for (int i = 0; i < count; i++)
                             tvResult.setText(tvResult.getText().toString() + ", " + integer[i]);
                     }
